@@ -1,0 +1,47 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    /*
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "taskName": "echo",
+            "command": "echo Hello",
+            "type": "shell"
+        }
+    ]
+    */
+    "version": "0.1.0",
+    "command": "cmd",
+    "isShellCommand": false,
+    "showOutput": "always",
+    "args": ["/C"],
+    "tasks": [
+        {
+            "taskName": "build",
+            "suppressTaskName": true,
+            "echoCommand": true,
+            "args": ["g++", "-g", "${fileBasename}", "-o", "${fileBasenameNoExtension}.out"],
+            "showOutput": "silent",
+            "isBuildCommand": true, // 绑定 Ctrl+Shift+B 快捷键
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": ["relative", "${workspaceRoot}"],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        },
+        {
+            "taskName": "clear",
+            "suppressTaskName": true,
+            "args": ["del", "*.out"],
+            "showOutput": "never"
+        }
+    ]
+}
